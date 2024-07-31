@@ -18,7 +18,8 @@ import 'package:project_demo/widgets/small_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   int pageId;
-  PopularFoodDetail({super.key, required this.pageId});
+  final String page;
+  PopularFoodDetail({super.key, required this.pageId, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +59,21 @@ class PopularFoodDetail extends StatelessWidget {
                 // show the back icon and quay lại trang trước
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouterHelper.getInitial());
+                   if (page == "cartpage") {
+                     Get.toNamed(RouterHelper.getCart());
+                   } else {
+                     Get.toNamed(RouterHelper.getInitial());
+                   }
                   },
                   child: AppIcon(icon: Icons.arrow_back_ios),
                 ),
                GetBuilder<PopularProductController>(builder: (controller) {
                 return GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouterHelper.getCart());
+                    if(controller.totalItems>=1){
+
+                       Get.toNamed(RouterHelper.getCart());
+                    }
                   },
                   child: Stack(
                     children: [
@@ -81,7 +89,7 @@ class PopularFoodDetail extends StatelessWidget {
                         
                        ):
                         Container(),
-                      Get.find<PopularProductController>().totalItems>=1? 
+                       controller.totalItems>=1? 
                        Positioned(
                         right: 5, 
                         top: 1,

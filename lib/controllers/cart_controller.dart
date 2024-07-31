@@ -10,8 +10,8 @@ class CartController extends GetxController {
 
   CartController({required this.cartRepo});
   
-  final Map<int, CartModel> _cartItems = {};
-  Map<int, CartModel> get cartItems => _cartItems;
+  final Map<int, CartModel> _cartItems = {}; // id, CartModel
+  Map<int, CartModel> get cartItems => _cartItems; // id, CartModel
 // 0, 1 ,2 ... 20
   void addItem(ProductModel product, int quantity) {
     if (product.id == null) return;
@@ -41,6 +41,7 @@ class CartController extends GetxController {
           img: product.img,
           isExits: true,
           time: DateTime.now().toString(),
+          product: product
         );
       }, ifAbsent: () {
         return CartModel(
@@ -51,9 +52,11 @@ class CartController extends GetxController {
           img: product.img,
           isExits: true,
           time: DateTime.now().toString(),
+          product: product
         );
       });
     }
+    update();
   }
 
   bool existInCart(ProductModel product) {
@@ -76,5 +79,12 @@ class CartController extends GetxController {
     return _cartItems.entries.map((e){
       return e.value;
     }).toList();
+  }
+  int get totalAmount {
+    var totalAmount = 0;
+    _cartItems.forEach((key, value) {
+      totalAmount += value.price! * value.quantity!;
+    });
+    return totalAmount;
   }
 }

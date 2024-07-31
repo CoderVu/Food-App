@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:project_demo/pages/food/popular_food_detail.dart';
 import 'package:project_demo/helper/dependencies.dart' as dep;
 import 'package:project_demo/routers/router_helper.dart';
+import 'package:project_demo/splash/splash_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dep.init();
@@ -27,12 +28,13 @@ class MyApp extends StatelessWidget{
         primarySwatch: Colors.blue,
       ),
       // home: PopularFoodDetail(),
-       home: MainFoodPage(),
-       initialRoute: RouterHelper.getInitial(),
+      //  home: MainFoodPage(),
+       initialRoute: RouterHelper.getSplash(),
        getPages: RouterHelper.routers,
       // home : RecommendedFoodDetail(),
       // home: FoodPageBody(),
       // home: CartPage(),
+     // home: SplashScreen(),
     );
   }
 }

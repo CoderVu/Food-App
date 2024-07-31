@@ -107,7 +107,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
          itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              Get.toNamed(RouterHelper.getRecommendedFood(index)); // truyền tham số qua trang chi tiết
+              Get.toNamed(RouterHelper.getRecommendedFood(index,"home")); // truyền tham số qua trang chi tiết
             },
             child: Container(
               margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height10, top: Dimensions.height10),
@@ -217,7 +217,7 @@ Widget _buildPageItem(int index, ProductModel popularProduct) {
       children: [
         GestureDetector (
                onTap: () {
-              Get.toNamed(RouterHelper.getPopularFood(index)); // truyền tham số qua trang chi tiết
+              Get.toNamed(RouterHelper.getPopularFood(index, 'home')); // truyền tham số qua trang chi tiết
             },
           child: Container(
             height: Dimensions.pageViewContainer,

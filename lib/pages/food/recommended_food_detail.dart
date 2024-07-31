@@ -14,7 +14,8 @@ import 'package:project_demo/widgets/expandable_text_widget.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
-   const RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final String page;
+   const RecommendedFoodDetail({Key? key, required this.pageId, required this.page}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
@@ -34,9 +35,13 @@ class RecommendedFoodDetail extends StatelessWidget {
                 GestureDetector(
                   onTap: (){
                     // quay lại trang chủ
-                    Get.toNamed(RouterHelper.getInitial());
+                      if (page == "cartpage") {
+                     Get.toNamed(RouterHelper.getCart());
+                   } else {
+                     Get.toNamed(RouterHelper.getInitial());
+                   }
                   },
-                  child: AppIcon(icon: Icons.clear)),
+                  child: AppIcon(icon: Icons.clear ,size: Dimensions.iconSize30)),
                   GetBuilder<PopularProductController>(builder: (controller) {
                 return Stack(
                   children: [
@@ -44,7 +49,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       onTap: (){
                        Get.toNamed(RouterHelper.cart);
                       },
-                      child: AppIcon(icon: Icons.shopping_cart_outlined)),
+                      child: AppIcon(icon: Icons.shopping_cart_outlined, size: Dimensions.iconSize30,)),
                     Get.find<PopularProductController>().totalItems>=1? 
                      Positioned(
                         right: 0, 
