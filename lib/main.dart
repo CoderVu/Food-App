@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_demo/controllers/cart_controller.dart';
 import 'package:project_demo/controllers/popular_product_controller.dart';
 import 'package:project_demo/controllers/recommended_product_controller.dart';
 import 'package:project_demo/pages/cart/cart_page.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget{
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context){
+    Get.find<CartController>().getCartData();
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(

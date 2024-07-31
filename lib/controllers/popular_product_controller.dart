@@ -84,7 +84,7 @@ int checkQuantity(int quantity) {
       _quantity = _cartController.getQuantity(product);
       _inCartItems = _quantity;
     }
-    print("Quantity in the cart is: $_quantity");
+    //print("Quantity in the cart is: $_quantity");
   }
 
   void addItemToCart(ProductModel product) {

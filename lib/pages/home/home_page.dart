@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_demo/pages/history/history_oder_page.dart';
 import 'package:project_demo/pages/home/main_food_page.dart';
 import 'package:project_demo/utils/colors.dart';
 
@@ -11,7 +12,7 @@ class _HomePageState extends State<HomePage>{
   int _currentIndex = 0;
   List pages=[
     MainFoodPage(),
-    Container(child: Center(child: Text("Next page"),),),
+    HistoryOrderPage(),
     Container(child: Center(child: Text("Next next page"),),),
     Container(child: Center(child: Text("Next next next page"),),),
   ];

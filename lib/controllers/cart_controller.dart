@@ -10,9 +10,11 @@ class CartController extends GetxController {
 
   CartController({required this.cartRepo});
   
-  final Map<int, CartModel> _cartItems = {}; // id, CartModel
+  Map<int, CartModel> _cartItems = {}; // id, CartModel
   Map<int, CartModel> get cartItems => _cartItems; // id, CartModel
 // 0, 1 ,2 ... 20
+  List<CartModel> storageItems = [];
+
   void addItem(ProductModel product, int quantity) {
     if (product.id == null) return;
 
@@ -56,6 +58,7 @@ class CartController extends GetxController {
         );
       });
     }
+    cartRepo.addToCartList(cartItemsList);
     update();
   }
 
@@ -86,5 +89,31 @@ class CartController extends GetxController {
       totalAmount += value.price! * value.quantity!;
     });
     return totalAmount;
+  }
+    List<CartModel> getCartData() {
+   setCartData = cartRepo.getToCartList();
+    return storageItems;
+  }
+  List<CartModel> getCartHistoryData() {
+    return cartRepo.getCartHistoryList();
+  }
+
+  set setCartData(List<CartModel> items) {
+    storageItems = items;
+
+    for (int i = 0; i < storageItems.length; i++) {
+      _cartItems.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+    }
+    //print("danh sách sản phầm đã lưu: $storageItems");
+    print("length: ${storageItems.length}");
+    update();
+  } 
+  void addToCartHistoryList(){
+    cartRepo.addToCartHistoryList();
+    clear();
+  }
+  void clear(){
+    _cartItems={};
+    update();
   }
 }

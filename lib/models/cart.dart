@@ -6,21 +6,21 @@ class CartModel {
   int? price;
   String? img;
   int? quantity;
-  bool? isExits ;
+  bool? isExits;
   String? time;
   ProductModel? product;
-CartModel(
+
+  CartModel(
       {this.id,
       this.name,
-      this.price,   
+      this.price,
       this.img,
       this.quantity,
       this.isExits,
       this.time,
-      this.product,
-     });
+      this.product});
 
-CartModel.fromJson(Map<String, dynamic> json) {
+  CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     price = json['price'];
@@ -28,8 +28,7 @@ CartModel.fromJson(Map<String, dynamic> json) {
     quantity = json['quantity'];
     isExits = json['isExits'];
     time = json['time'];
-    product = ProductModel.fromJson(json['product']);
-
+    product = json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -41,6 +40,9 @@ CartModel.fromJson(Map<String, dynamic> json) {
     data['quantity'] = this.quantity;
     data['isExits'] = this.isExits;
     data['time'] = this.time;
+    if (this.product != null) {
+      data['product'] = this.product!.toJson();
+    }
     return data;
   }
 }

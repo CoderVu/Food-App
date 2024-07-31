@@ -205,7 +205,7 @@ class CartPage extends StatelessWidget {
             ),
             GestureDetector(
                onTap: () {
-              //   popularProduct.addItemToCart(product);
+                 cartController.addToCartHistoryList();
                 },
               child: Container(
                 padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15, left: Dimensions.width20, right: Dimensions.width20),
