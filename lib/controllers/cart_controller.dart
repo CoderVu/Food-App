@@ -12,7 +12,7 @@ class CartController extends GetxController {
   
   final Map<int, CartModel> _cartItems = {};
   Map<int, CartModel> get cartItems => _cartItems;
-
+// 0, 1 ,2 ... 20
   void addItem(ProductModel product, int quantity) {
     if (product.id == null) return;
 
@@ -54,8 +54,6 @@ class CartController extends GetxController {
         );
       });
     }
-
-    update(); // Update the UI
   }
 
   bool existInCart(ProductModel product) {
@@ -73,5 +71,10 @@ class CartController extends GetxController {
       totalQuantity += value.quantity!;
     });
     return totalQuantity;
+  }
+  List<CartModel> get cartItemsList {
+    return _cartItems.entries.map((e){
+      return e.value;
+    }).toList();
   }
 }

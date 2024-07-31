@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_demo/controllers/popular_product_controller.dart';
 import 'package:project_demo/controllers/recommended_product_controller.dart';
+import 'package:project_demo/pages/cart/cart_page.dart';
 import 'package:project_demo/pages/food/recommended_food_detail.dart';
 import 'package:project_demo/pages/home/food_page_body.dart';
 import 'package:project_demo/pages/home/main_food_page.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget{
        getPages: RouterHelper.routers,
       // home : RecommendedFoodDetail(),
       // home: FoodPageBody(),
+      // home: CartPage(),
     );
   }
 }

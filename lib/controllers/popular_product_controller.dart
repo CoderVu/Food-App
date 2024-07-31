@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_demo/controllers/cart_controller.dart';
 import 'package:project_demo/data/respository/popular_product_repo.dart';
+import 'package:project_demo/models/cart.dart';
 import 'package:project_demo/models/products.dart';
 
 import 'package:project_demo/utils/colors.dart';
@@ -42,31 +43,36 @@ class PopularProductController extends GetxController {
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
-      print("isIncrement");
+      print("numberof iitems " + _quantity.toString());
+      print("isIncrement" );
       _quantity = checkQuantity(_quantity + 1);
     } else {
       print("isDecrement");
+      print("numberof iitems " + _quantity.toString());
       _quantity = checkQuantity(_quantity - 1);
     }
     update();
   }
 
-  int checkQuantity(int quantity) {
-    if ((_inCartItems + quantity) < 0) {
-      Get.snackbar("Error", "Item count can't be less than 0",
-        backgroundColor: AppColors.mainColor,
-        colorText: Colors.white,
-      );
-      return 0;
-    } else if ((_inCartItems + quantity) > 20) {
-      Get.snackbar("Error", "Item count can't be more than 20",
-        backgroundColor: AppColors.mainColor,
-        colorText: Colors.white,
-      );
-      return 20;
-    }
-    return quantity;
+int checkQuantity(int quantity) {
+  if ((_inCartItems + quantity) < 0) {
+    Get.snackbar("Error", "Item count can't be less than 0",
+      backgroundColor: AppColors.mainColor,
+      colorText: Colors.white,
+    );
+    return 0;
+  } 
+  if ((_inCartItems + quantity) > 20) {
+    Get.snackbar("Error", "Item count can't be more than 20",
+      backgroundColor: AppColors.mainColor,
+      colorText: Colors.white,
+    );
+    return 20;
   }
+  _quantity = _inCartItems + quantity;
+  return _quantity;
+}
+
 
   void initProduct(CartController cartController, ProductModel product) {
     _quantity = 0;
@@ -97,8 +103,12 @@ class PopularProductController extends GetxController {
         colorText: Colors.white,
       );
    }
+   update();
   }
   int get totalItems{
     return _cartController.totalItems;
+  }
+  List<CartModel> get cartItems {
+    return _cartController.cartItemsList;
   }
 }

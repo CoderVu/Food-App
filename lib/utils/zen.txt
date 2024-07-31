@@ -12,3 +12,5 @@ Widget build(BuildContext context) {
   return Container();
  }
 }
+// Trong Flutter, Expanded là một widget được sử dụng để mở rộng một widget con bên trong một Row, Column, hoặc Flex để chiếm không gian còn lại trong trục chính (main axis). Expanded thường được sử dụng để phân chia không gian giữa các widget con một cách linh hoạt.
+// Positioned là một widget trong Flutter được sử dụng để định vị các widget con một cách tuyệt đối bên trong một widget cha là Stack. Positioned cho phép bạn đặt widget con ở vị trí cụ thể bằng cách sử dụng các thuộc tính như top, bottom, left, right, width, và height.
