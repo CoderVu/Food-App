@@ -11,8 +11,6 @@ class CartRepo {
   List<String> cartHistory = [];
 
   void addToCartList(List<CartModel> cartList) {
-    // sharedPreferences.remove(AppConstants.CART_LIST); // 
-    // sharedPreferences.remove(AppConstants.CART_HISTOTY_LIST);
     var time = DateTime.now().toString();
     cartList.forEach((element) {
       element.time = time;
