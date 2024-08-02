@@ -9,6 +9,7 @@ class Dimensions {
   static double pageViewContainer = screenHeight / 3.84;
   static double pageViewTextContainer= screenHeight / 7.03;
 // Define the height of the widgets
+  static double height5 = screenHeight / 168.8;
   static double height10 = screenHeight / 84.4;
   static double height15 = screenHeight / 56.3;
   static double height20 = screenHeight / 42.2;

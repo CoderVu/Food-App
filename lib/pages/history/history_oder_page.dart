@@ -27,7 +27,7 @@ class HistoryOrderPage extends StatelessWidget {
 
         return ListView(
           children: groupedOrders.entries.map((entry) {
-            var orderTime = DateFormat('dd-MM-yyyy HH:mm').format(DateTime.parse(entry.key!));
+            var orderTime = DateFormat('dd-MM-yyyy HH:mm a').format(DateTime.parse(entry.key!));
             var orders = entry.value;
 
             return Column(
@@ -35,15 +35,33 @@ class HistoryOrderPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: Dimensions.height10,
+                    vertical: Dimensions.height5, // Giảm khoảng cách theo chiều dọc
                     horizontal: Dimensions.width20,
                   ),
-                  child: BigText(text: "Ordered on: $orderTime"),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BigText(text: "$orderTime"),
+                      SizedBox(height: Dimensions.height5), // Thêm khoảng cách nhỏ giữa thời gian và nút Reorder
+                      GestureDetector(
+                        onTap: () {
+                          // Gọi phương thức reorder với tất cả sản phẩm trong đơn hàng
+                          cartController.reorder(orders);
+                        },
+                        child: ButtonBar(
+                          children: [
+                            Icon(Icons.replay, color: AppColors.mainColor),
+                            BigText(text: "Reorder", color: AppColors.mainColor),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 ...orders.map((order) {
                   return Container(
                     margin: EdgeInsets.symmetric(
-                      vertical: Dimensions.height10,
+                      vertical: Dimensions.height5, // Giảm khoảng cách giữa các mục
                       horizontal: Dimensions.width20,
                     ),
                     decoration: BoxDecoration(
@@ -88,24 +106,6 @@ class HistoryOrderPage extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 10.0),
                                     child: BigText(text: "Số lượng: ${order.quantity.toString()}"),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(width: 1), // Khoảng cách trước nút "Reorder"
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Gọi phương thức reorder với sản phẩm cụ thể
-                                      cartController.reorder([order]);
-                                    },
-                                    child: ButtonBar(
-                                      children: [
-                                        Icon(Icons.replay, color: AppColors.mainColor),
-                                        BigText(text: "Reorder", color: AppColors.mainColor),
-                                      ],
-                                    ),
                                   ),
                                 ],
                               ),
