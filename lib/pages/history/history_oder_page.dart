@@ -6,7 +6,6 @@ import 'package:project_demo/utils/app_constants.dart';
 import 'package:project_demo/utils/colors.dart';
 import 'package:project_demo/utils/dimensions.dart';
 import 'package:project_demo/widgets/big_text.dart';
-import 'package:project_demo/widgets/small_text.dart';
 import 'package:intl/intl.dart';
 import 'package:collection/collection.dart';
 
@@ -82,14 +81,31 @@ class HistoryOrderPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               BigText(text: order.name!, color: Colors.black54),
-                              // SmallText(text: "Ordered on: $orderTime"),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   BigText(text: "\$${order.price!.toString()}", color: Colors.redAccent),
                                   Padding(
-                                    padding: EdgeInsets.only(right: 10.0),
+                                    padding: const EdgeInsets.only(right: 10.0),
                                     child: BigText(text: "Số lượng: ${order.quantity.toString()}"),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(width: 1), // Khoảng cách trước nút "Reorder"
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Gọi phương thức reorder với sản phẩm cụ thể
+                                      cartController.reorder([order]);
+                                    },
+                                    child: ButtonBar(
+                                      children: [
+                                        Icon(Icons.replay, color: AppColors.mainColor),
+                                        BigText(text: "Reorder", color: AppColors.mainColor),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

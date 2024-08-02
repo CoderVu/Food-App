@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_demo/data/respository/cart_repo.dart';
 import 'package:project_demo/models/cart.dart';
 import 'package:project_demo/models/products.dart';
+import 'package:project_demo/pages/cart/cart_page.dart';
 import 'package:project_demo/utils/colors.dart';
 
 class CartController extends GetxController {
@@ -112,8 +113,19 @@ class CartController extends GetxController {
     cartRepo.addToCartHistoryList();
     clear();
   }
+  // xóa giỏ hàng
   void clear(){
     _cartItems={};
     update();
+  }
+  // mua hàng lại
+    void reorder(List<CartModel> previousOrder) {
+    for (var item in previousOrder) {
+      if (item.product?.id != null) {
+        _cartItems[item.product!.id!] = item;
+      }
+    }
+    update(); // Notify listeners to rebuild UI
+    Get.to(() => CartPage()); // Navigate to CartPage
   }
 }
